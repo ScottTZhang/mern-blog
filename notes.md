@@ -24,3 +24,7 @@ https://v3.tailwindcss.com/docs/installation/using-postcss
 ```
 
 package.json:   `"type": "commonjs",`
+
+git init
+git add .
+got commit -m "..."
