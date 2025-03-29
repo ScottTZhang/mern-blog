@@ -87,10 +87,32 @@ In client folder, `npm i react-icons`
 **[Issue]**
 `<Button gradientDuoTone="purpleToBlue">` does not work, and replaced with:
 
+Cause: lib version has updated to new ones. libs that supported gradientDuoTone:
+ - flowbite	^1.6.0
+ - flowbite-react	^0.5.2
+
 ```
-<Button className="bg-gradient-to-br from-purple-600 to-blue-500 text-white hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800">
-  Purple to Blue
-</Button>
+<Link to="/sign-in">
+  <Button
+    className="
+      bg-white                 // 默认背景白色
+      text-black                // 默认文字黑色
+      border border-gray-300    // 默认边框
+      hover:bg-gradient-to-r    // 悬停时渐变背景
+      hover:from-purple-500     // 渐变色起始
+      hover:to-blue-500         // 渐变色结束
+      hover:text-white          // 悬停时文字白色
+      hover:border-transparent  // 悬停时隐藏边框
+      transition-all            // 过渡效果
+      duration-300              // 过渡时长300ms
+      focus:ring-4              // 焦点状态保留原配置
+      focus:ring-blue-300     
+      dark:focus:ring-blue-800
+    "
+  >
+    Sign In
+  </Button>
+</Link>
 ```
 
 **`order-2`**
@@ -110,3 +132,27 @@ NavbarLink Rendered as <div>:
  - The as={'div'} prop explicitly instructs the NavbarLink component to render as a <div> instead of its default tag (e.g., <a>).
  - This means that the NavbarLink itself will be a <div> in the DOM.
 Link Remains a <Link>:
+ - It is not affected by the as={'div'} prop because the as prop only applies to the NavbarLink component.
+
+ ### [03/29/25] Create and run the server
+1. Version control: In package.json:
+ - "flowbite": "^1.6.0"  // Allows 1.6.0 ~ 1.999.999
+ - "flowbite": "~1.6.0"  // 允许 1.6.0 ~ 1.6.999
+
+**Create Server**:
+
+1. `npm init -y 是一个快速初始化 Node.js 项目的命令`
+使用 -y（或 --yes）参数时，npm 会跳过所有配置问题，直接使用默认值填充文件。
+
+2. package.json: add `"type": "module",`
+
+3. `npm i nodemon` updates servers automatically and instantly.
+
+4. package.json: add 
+  ```
+    "scripts": {
+      "dev": "nodemon api/index.js",
+      "start": "node api/index.js" /* For production deployment */
+    }
+  ```
+  To use the script, in terminal: `npm run dev`, or, `npm run start`

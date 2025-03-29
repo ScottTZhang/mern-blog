@@ -1,7 +1,7 @@
-import {Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput, Button} from 'flowbite-react'
-import { Link , useLocation} from 'react-router-dom'
-import {AiOutlineSearch} from 'react-icons/ai'
-import {FaMoon} from 'react-icons/fa'
+import {Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput, Button} from 'flowbite-react';
+import { Link , useLocation} from 'react-router-dom';
+import {AiOutlineSearch} from 'react-icons/ai';
+import {FaMoon} from 'react-icons/fa';
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -27,11 +27,22 @@ export default function Header() {
         <Button className='w-12 h-10 hidden sm:inline' color='gray' pill>
           <FaMoon />
         </Button>
-        <Link to='/sign-in'>
-          <Button className="bg-gradient-to-br from-purple-600 to-blue-500 text-white hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800">
+        <Link to="/sign-in">
+          <Button
+            className="
+              bg-white text-black
+              border-2 border-gray-300
+              hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500
+              hover:text-white hover:border-transparent
+              transition-colors duration-300
+              focus:ring-4 focus:ring-blue-300
+              dark:border-gray-600 dark:hover:border-transparent  // 暗黑模式适配
+            "
+          >
             Sign In
           </Button>
         </Link>
+        
         <NavbarToggle />
       </div>
       <NavbarCollapse>
