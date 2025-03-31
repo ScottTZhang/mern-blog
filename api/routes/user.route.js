@@ -1,12 +1,7 @@
 import express from 'express';
-
+import { test } from '../controllers/user.controller.js'; // Import the test function from the controller
 const router = express.Router();
 
-router.get('/test', (req, res) => {
-  //req: data that we send to the server
-  //res: data that we get from the server
-  res.json({message: 'API is working'});
-}
-);
+router.get('/test', test); //(req, res) function may have many different logtics, so we need to add it to another folder "controllers" and import it here
 
 export default router;
