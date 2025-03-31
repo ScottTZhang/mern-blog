@@ -62,7 +62,7 @@ In clien folder, `npm i react-router-dom`
 
 App.jsx: `import {BrowserRouter, Routes, Route} from 'react-router-dom';` 
 
-Add and import realted components.
+Add and import related components.
 
 ### [03/27/25] Create header components
 
@@ -160,3 +160,6 @@ Link Remains a `<Link>`:
 ### [03/30/25] Connect to the database
 1. In MERN-blog: `npm install express mongoose dotenv`
 2. Create .env file
+
+### [03/31/25] Create user model
+1. Create user.model.js
