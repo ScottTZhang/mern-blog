@@ -179,3 +179,17 @@ Link Remains a `<Link>`:
 Then browser needs to use api:
 
 http://localhost:3000/**api/user/test/**
+
+### [03/31/25] Create signup API route
+1. `const router = express.Router();`
+
+ - Instance Creation: The `express.Router()` function creates a new router object. This object behaves like a mini Express application, capable of handling middleware and routes.
+ - Route Definitions: You can define routes (e.g., GET, POST, PUT, DELETE) on this router instance using methods like `router.get()`, `router.post()`, etc.
+ - Middleware: You can also attach middleware to the router to process requests before they reach the route handlers.
+ - Export and Use: Typically, the router is exported from the module and then mounted onto a specific path in the main application file using `app.use()`.
+
+2. `app.use(express.json()); // allow json data to be sent to the server`
+
+3. Click **"Browse collections"** to check the data inserted to the MongoDB.
+
+4. User **bcryptjs** to hash the password.
