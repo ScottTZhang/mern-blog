@@ -163,3 +163,19 @@ Link Remains a `<Link>`:
 
 ### [03/31/25] Create user model
 1. Create user.model.js
+
+### [03/31/25] Create a test API route
+1. Best practice is not to put all api routes in the index.js, because there are too many. For example, for users we have pulls.
+2. index.js: 
+
+`import userRoutes from './routes/user.route.js';`
+
+`app.`**`use`**`('/api/user', userRoutes);`
+
+  user.route.js:
+
+`router.get('/test', (req, res) => {//...});`
+
+Then browser needs to use api:
+
+http://localhost:3000/**api/user/test/**
