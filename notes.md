@@ -192,7 +192,7 @@ http://localhost:3000/**api/user/test/**
 
 3. Click **"Browse collections"** to check the data inserted to the MongoDB.
 
-4. User **bcryptjs** to hash the password.
+4. Use **bcryptjs** to hash the password.
 
 ### [04/03/25] Add a middleware and a function to handle errors
 
@@ -203,3 +203,58 @@ If a middleware function does not end the request-response cycle (e.g., by sendi
 ### [04/03/25] Create signup page UI
 
 1. Command + t : to search a file
+
+### [04/03/25] Add functionality to the sign up page
+
+1. **`e.preventDefault()`**:
+
+When an event occurs, such as a form submission or a link click, the browser has a default action associated with that event:
+
+ - For a form submission, the default behavior is to **reload the page** and send the form data to the server.
+ - (For a link click (`<a>` tag), the default behavior is to navigate to the URL specified in the href attribute.)
+
+2. **proxy**
+```
+server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false
+        }
+    }
+  }
+```
+The proxy property inside the server object is used to define proxy rules. A proxy is a server that acts as an intermediary for requests from the client to another server.
+
+If your frontend makes a request like this:
+```
+const res = await (fetch('/api/auth/signup', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData),
+}));
+```
+The Vite proxy will intercept the request to /api/users and forward it to http://localhost:3000/api/users. The backend server running on port 3000 will handle the request and return the response, which is then passed back to the frontend.
+
+3. **Browser -> Inspect -> Network**: to check Headers, Request, Response for the submit status
+
+4. If `required={true}` is used, then it will validate the `<TextInput>` before the `errorMessage` triggers the `<Alert>`
+
+5. React Components Must Return a **Single Parent Element**
+
+In React, every component or conditional rendering block must return a single parent element. Without the <></> fragment, the following code would result in an error because <Spinner> and <span> are sibling elements:
+
+```
+  <>
+    <Spinner size='sm' />
+    <span className="pl-3">Loading...</span>
+  </>
+```
+
+6. **`const navigate = useNavigate();`**:
+
+Is a **hook** provided by the **react-router-dom** library, which is commonly used for client-side routing in React applications.
+
+  - After Form Submission: Redirect the user to another page after successfully submitting a form. 

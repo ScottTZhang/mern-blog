@@ -7,5 +7,12 @@ export default defineConfig({
   plugins: [react(), flowbiteReact()],
   css: {
     postcss: './postcss.config.cjs' // 显式指定路径
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false      }
+    }
   }
 })
