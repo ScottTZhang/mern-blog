@@ -195,3 +195,11 @@ http://localhost:3000/**api/user/test/**
 4. User **bcryptjs** to hash the password.
 
 ### [04/03/25] Add a middleware and a function to handle errors
+
+1. **`next()`**:
+
+If a middleware function does not end the request-response cycle (e.g., by sending a response with `res.send()`), it must call `next()` to pass control to the next middleware or route handler. Without calling next(), the request will hang, as Express will not know how to proceed.
+
+### [04/03/25] Create signup page UI
+
+1. Command + t : to search a file
