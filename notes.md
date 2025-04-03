@@ -193,3 +193,5 @@ http://localhost:3000/**api/user/test/**
 3. Click **"Browse collections"** to check the data inserted to the MongoDB.
 
 4. User **bcryptjs** to hash the password.
+
+### [04/03/25] Add a middleware and a function to handle errors

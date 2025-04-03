@@ -1,12 +1,13 @@
 import User from '../models/user.model.js';
 import bcryptjs from 'bcryptjs';
+import { errorHandler } from '../utils/error.js'; // Import the error handler function
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   //console.log(req.body);
   const {username, email, password} = req.body; //desctructure
 
   if (!username || !email || !password || username === '' || email === '' || password === '') {
-    return res.status(400).json({message: 'Please fill in all fields'});
+    next(errorHandler(400, 'Please fill all the fields')); // Use the error handler function
   }
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -23,7 +24,8 @@ export const signup = async (req, res) => {
     });
   } catch (error) {
     //console.log(error);
-    return res.status(500).json({message: error.message});
+    //return res.status(500).json({message: error.message});
+    next(error); // Pass the error to the error handling middleware
   }
 
 }
