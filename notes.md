@@ -263,7 +263,7 @@ Is a **hook** provided by the **react-router-dom** library, which is commonly us
 
 1. Add the Footer.jsx to App.jsx
 
-2. Version update: sFootter.Title => FooterTitle
+2. Version update: Footter.Title => FooterTitle
 
 3. `w-full sm:flex sm:items-center sm:justify-between`
 
@@ -278,3 +278,28 @@ The items-center utility aligns the child elements along the cross-axis (vertica
 - sm:justify-between
 
 The first child is aligned to the start, the last child to the end, and any remaining space is distributed between them.
+
+### [04/07/25] Create sign in API route
+
+1. In root directory, `npm i jsonwebtoken`
+
+
+2. In auth.controller.js:
+
+
+```
+  const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+  res.status(200).cookie('access_token', token, {
+    httpOnly: true
+  }).json(validUser);
+```
+
+The cookie method is used to set a cookie in the HTTP **response**. 
+
+`access_token` : This is the name of the cookie. In this case, it stores the JWT (JSON Web Token) as the value.
+
+`token` : This is the value of the cookie, which in this case is the JWT generated earlier in the code.
+
+`{ httpOnly: true }` : This option makes the cookie HTTP-only, meaning it cannot be accessed via JavaScript on the client-side.
+
+`.json(validUser)` : The json method sends a JSON response to the client. In this case, it sends the validUser object, 
