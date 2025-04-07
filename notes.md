@@ -258,3 +258,23 @@ In React, every component or conditional rendering block must return a single pa
 Is a **hook** provided by the **react-router-dom** library, which is commonly used for client-side routing in React applications.
 
   - After Form Submission: Redirect the user to another page after successfully submitting a form. 
+
+### [04/06/25] Create and add the footer component
+
+1. Add the Footer.jsx to App.jsx
+
+2. Version update: sFootter.Title => FooterTitle
+
+3. `w-full sm:flex sm:items-center sm:justify-between`
+
+- w-full
+
+This class sets the width of the element to 100% of its parent container.
+
+- sm:items-center
+
+The items-center utility aligns the child elements along the cross-axis (vertical axis in a row layout) to the center.
+
+- sm:justify-between
+
+The first child is aligned to the start, the last child to the end, and any remaining space is distributed between them.
