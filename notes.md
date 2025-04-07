@@ -302,4 +302,12 @@ The cookie method is used to set a cookie in the HTTP **response**.
 
 `{ httpOnly: true }` : This option makes the cookie HTTP-only, meaning it cannot be accessed via JavaScript on the client-side.
 
-`.json(validUser)` : The json method sends a JSON response to the client. In this case, it sends the validUser object, 
+`.json(validUser)` : The json method sends a JSON response to the client. In this case, it sends the validUser object
+
+### [04/07/25] Add functionality to the sign in page
+
+1. Add `finally block` to ensure `setLoading(false)` is called in all cases:
+  - *Validation Errors*: If the form fields are invalid,
+  - *Server Errors*: If the server responds with an error,
+  - *Network Errors*: If an exception is thrown (e.g., network failure),
+  - *Successful Sign-In*: If the sign-in is successful, setLoading(false) is still called in the finally block after navigating to the home page.
