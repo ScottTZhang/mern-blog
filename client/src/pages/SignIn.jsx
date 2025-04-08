@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
 
 export default function SignIn() {
   
@@ -12,10 +14,14 @@ export default function SignIn() {
   });
   // Destructure the formData state
 
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  // Destructure the errorMessage and loading state
+  //const [errorMessage, setErrorMessage] = useState(null);
+  //const [loading, setLoading] = useState(false);
+  // Destructure the errorMessage and loading state. Replaced by Redux state
 
+  const {loading, error: errorMessage} = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+  // Initialize the dispatch function from Redux
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,19 +36,23 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent refreshing the page
 
-    console.log("err: ",errorMessage);
+    //console.log("err: ",errorMessage);
     if (
       !formData.email ||
       !formData.password ||
       formData.email === "" ||
       formData.password === ""
     ) {
-      setLoading(false);
-      return setErrorMessage("Please fill all the fields");
+      //setLoading(false);
+      //return setErrorMessage("Please fill all the fields");
+      return dispatch(signInFailure("Please fill all the fields")); // Dispatch the signInFailure action with the error message. Replace the above code
     }
     try {
-      setLoading(true); //when submitting is trying to send data
-      setErrorMessage(null); // Reset error message
+      //setLoading(true); //when submitting is trying to send data
+      //setErrorMessage(null); // Reset error message
+      dispatch(signInStart());
+      // Dispatch the signInStart action to update the Redux state, to replace the aobve code
+      
       const res = await (fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
@@ -52,19 +62,25 @@ export default function SignIn() {
       }));
       const data = await res.json();
       if (data.success === false) {
-        setLoading(false);
-        setErrorMessage(data.message);
+        //setLoading(false);
+        //setErrorMessage(data.message);
+        dispatch(signInFailure(data.message)); // Dispatch the signInFailure action with the error message. Replace the above code
       }
       
       if (res.ok) {
-        setErrorMessage(null); // Reset error message
+        //setErrorMessage(null); // Reset error message
+        dispatch(signInSuccess(data)); // Dispatch the signInSuccess action with the user data. 
+        console.log("data: ", data);
+        //Replace the above code
         navigate('/');
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false); // Reset loading state
+      //setErrorMessage(error.message);
+      //setLoading(false); // Reset loading state
+      dispatch(signInFailure(error.message)); // Dispatch the signInFailure action with the error message. Replace the above code
     } finally {
-      setLoading(false); // Ensure loading is reset in all cases
+      //setLoading(false); // Ensure loading is reset in all cases
+      dispatch(signInStart()); // Reset loading state
     }
   };
 
@@ -92,7 +108,6 @@ export default function SignIn() {
               <TextInput
                 type="email"
                 placeholder="name@company"
-                required={true}
                 id="email"
                 className="mt-2" onChange={handleChange}
               />
@@ -102,7 +117,6 @@ export default function SignIn() {
               <TextInput
                 type="password"
                 placeholder="Password"
-                required={true}
                 id="password"
                 className="mt-2" onChange={handleChange}
               />
