@@ -341,7 +341,7 @@ Redux: Save information in front end as global state
     posts: postsReducer, // Manages the "posts" slice of state
   });
   ```
-  - The `reducer` key in the configureStore function is fixed. It is a required property that specifies the reducer function for the Redux store.
+  - The `reducer` key in the configureStore function is **fixed**. It is a required property that specifies the reducer function for the Redux store.
   - The `combineReducers()` function from Redux Toolkit is also fixed. It is used to combine multiple reducers into a single rootReducer.
   - The store is fixed in the sense that there is only one store per application.
   - It combines all the slices and reducers into a single global state.
@@ -472,6 +472,20 @@ After sign in, if I refresh the page, the signed in user will be lost.
 
 In a typical Redux application, the state is stored in memory and is reset whenever the page is refreshed. **redux-persist** solves this problem by saving the Redux state to a persistent storage medium, such as **localStorage, sessionStorage**, or other custom storage engines.
 
-To save information locally.
+Purpose: To save information locally.
 
   - In client folder, npm i redux-persist
+
+redux-persist may introduce non-serializable values (e.g., **promises**) into the state, which would trigger warnings or errors if the serializableCheck middleware is enabled.
+
+### [04/10/25] Add Google OAuth functionality
+
+1. Create project at firebase.google.com
+
+2. Clien side: npm install firebase
+
+3. .env in clien variable must start with 'VITE'
+
+These variables can be accessed in the client-side code using `import.meta.env`
+
+4. Complete **Authentication** from firebase

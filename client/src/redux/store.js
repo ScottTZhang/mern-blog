@@ -20,7 +20,9 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, //prevent error from redux-toolkit
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST'],
+      }, //prevent error from redux-toolkit
     }), 
 })
 

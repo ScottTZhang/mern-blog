@@ -4,6 +4,7 @@ import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function SignIn() {
   
@@ -61,9 +62,11 @@ export default function SignIn() {
         body: JSON.stringify(formData),
       }));
       const data = await res.json();
+      
       if (data.success === false) {
         //setLoading(false);
         //setErrorMessage(data.message);
+        console.log("data.message: ", data.message);
         dispatch(signInFailure(data.message)); // Dispatch the signInFailure action with the error message. Replace the above code
       }
       
@@ -80,7 +83,7 @@ export default function SignIn() {
       dispatch(signInFailure(error.message)); // Dispatch the signInFailure action with the error message. Replace the above code
     } finally {
       //setLoading(false); // Ensure loading is reset in all cases
-      dispatch(signInStart()); // Reset loading state
+      dispatch(signInFailure(error.message)); // Reset loading state
     }
   };
 
@@ -134,7 +137,9 @@ export default function SignIn() {
                 ): 'Sign In'
               }
             </Button>
+            <OAuth />
           </form>
+          
           <div className="flex gap-2 mt-5 text-sm">
             <span>Don't have an account?</span> 
             <Link to="/sign-up" className="text-blue-500">Sign up</Link>
