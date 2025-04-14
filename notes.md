@@ -513,7 +513,13 @@ These variables can be accessed in the client-side code using `import.meta.env`
 
 3. `className='block text-sm'`
 
-When an element is styled with display: block, it:  1) Takes Up Full Width. 2) Starts on a New Line. 3) Default for Block Elements: Many HTML elements, such as <div>, <p>, and <h1>, are block-level by default. The block class can be used to explicitly set this behavior for elements that are not block-level by default, such as <span> or <a>, **making them stack vertically**.
+When an element is styled with display: block, it: 
+
+(1) Takes Up Full Width. 
+
+(2) Starts on a New Line. 
+
+(3) Default for Block Elements: Many HTML elements, such as `<div>`, `<p>`, and `<h1>`, are block-level by default. The block class can be used to explicitly set this behavior for elements that are not block-level by default, such as `<span>` or `<a>`, **making them stack vertically**.
 
 ### [04/14/25] Complete dark mode functionality
 1. In JavaScript, a **default export** allows you to export a single value (e.g., a function, object, or variable) from a module. When importing a default export, you can name the imported value anything you like.
