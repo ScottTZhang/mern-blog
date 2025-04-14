@@ -515,4 +515,25 @@ These variables can be accessed in the client-side code using `import.meta.env`
 
 When an element is styled with display: block, it:  1) Takes Up Full Width. 2) Starts on a New Line. 3) Default for Block Elements: Many HTML elements, such as <div>, <p>, and <h1>, are block-level by default. The block class can be used to explicitly set this behavior for elements that are not block-level by default, such as <span> or <a>, **making them stack vertically**.
 
- 
+### [04/14/25] Complete dark mode functionality
+1. In JavaScript, a **default export** allows you to export a single value (e.g., a function, object, or variable) from a module. When importing a default export, you can name the imported value anything you like.
+
+`export default themeSlice.reducer;`
+
+`import themeReducer from './theme/themeSlice';` 
+
+themeReducer is any name I can use
+
+2. **Issue**: ThemeProvider className is toggle correctly, but the style is not applied.
+
+[Solution]:
+
+Verify that your Tailwind CSS configuration supports dark mode (darkMode: "class").
+
+In tailwind.config.js: add `darkMode: 'class',`
+
+3. `min-h-screen`
+
+Responsive Design: The min-h-screen class ensures that the element adapts to the height of the user's viewport, making it ideal for responsive layouts.
+Utility-First Approach: By using a utility class like min-h-screen, you can quickly apply this behavior without writing custom CSS.
+Improved Aesthetics: It helps create visually balanced layouts by ensuring that sections or pages always fill the screen, even with minimal content.
