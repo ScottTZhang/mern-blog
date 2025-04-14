@@ -489,3 +489,30 @@ redux-persist may introduce non-serializable values (e.g., **promises**) into th
 These variables can be accessed in the client-side code using `import.meta.env`
 
 4. Complete **Authentication** from firebase
+
+### [04/13/25] Update header component with user data
+1. Fixed "A resource is blocked by OpaqueResponseBlocking" issue
+
+ - `npm install cors`
+ - Update index.js:
+    ```
+    import cors from 'cors';
+
+    app.use(cors({
+      origin: 'http://localhost:3000', // Replace with your frontend's URL
+      methods: ['GET', 'POST'], // Allowed HTTP methods
+      credentials: true, // Allow cookies if needed
+    }));
+    ```
+
+2. const { currentUser } = useSelector((state) => state.user); // For use user data
+  
+  //state represents the entire Redux state.
+  
+  //state.user.currentUser is the specific part of the state being accessed.
+
+3. `className='block text-sm'`
+
+When an element is styled with display: block, it:  1) Takes Up Full Width. 2) Starts on a New Line. 3) Default for Block Elements: Many HTML elements, such as <div>, <p>, and <h1>, are block-level by default. The block class can be used to explicitly set this behavior for elements that are not block-level by default, such as <span> or <a>, **making them stack vertically**.
+
+ 

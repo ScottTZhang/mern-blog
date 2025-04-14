@@ -79,10 +79,15 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: email });
     if (user) {
+      // Generate a token for the existing user
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+      });
+
       const { password, ...rest } = user._doc; // Destructure the user object to exclude the password
       res
         .status(200)
-        .coockie("access_token", token, {
+        .cookie("access_token", token, {
           httpOnly: true,
         })
         .json(rest);

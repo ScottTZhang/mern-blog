@@ -1,11 +1,16 @@
-import {Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput, Button} from 'flowbite-react';
+import {Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput, Button, Dropdown, DropdownHeader ,Avatar, DropdownItem, DropdownDivider} from 'flowbite-react';
 import { Link , useLocation} from 'react-router-dom';
 import {AiOutlineSearch} from 'react-icons/ai';
 import {FaMoon} from 'react-icons/fa';
+import { useSelector } from 'react-redux'; // For use user data
 
 export default function Header() {
   const path = useLocation().pathname;
 
+  const { currentUser } = useSelector((state) => state.user); // For use user data
+  //state represents the entire Redux state.
+  //state.user.currentUser is the specific part of the state being accessed.
+  
   return (
     <Navbar className='border-b-2'>
       <Link to="/" className='self-center whitespace-nowarp text-sm sm:text-xl font-semibold dark:text-white'>
@@ -27,7 +32,28 @@ export default function Header() {
         <Button className='w-12 h-10 hidden sm:inline' color='gray' pill>
           <FaMoon />
         </Button>
-        <Link to="/sign-in">
+        {currentUser ? (
+          <Dropdown arrowIcon={false} inline label={
+            <Avatar 
+              alt='user'
+              img={currentUser.profilePicture}
+              rounded
+            />
+          }>
+          <DropdownHeader>
+            <span className='block text-sm'>@{currentUser.username}</span>
+            <span className='block text-sm font-medium truncate'>{currentUser.email}</span>
+          </DropdownHeader>
+          <Link to={'/dashboard?tab=profile'}>
+            <DropdownItem>
+              Profile
+            </DropdownItem>
+          </Link>
+          <DropdownDivider />
+          <DropdownItem>Sign out</DropdownItem>
+          </Dropdown>
+        ) : (
+          <Link to="/sign-in">
           <Button
             className="
               bg-white text-black
@@ -42,6 +68,8 @@ export default function Header() {
             Sign In
           </Button>
         </Link>
+        )}
+        
         
         <NavbarToggle />
       </div>
