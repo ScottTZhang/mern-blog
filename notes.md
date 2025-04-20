@@ -578,3 +578,5 @@ The `Outlet` is used to render the specific content of the child route while kee
     No Array: The effect runs after every render, similar to combining componentDidMount and componentDidUpdate.
 
     Specific Dependencies: The effect runs only when one of the specified dependencies changes.
+
+### [04/19/25] Complete profile page UI
