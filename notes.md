@@ -543,3 +543,21 @@ In tailwind.config.js: add `darkMode: 'class',`
 Responsive Design: The min-h-screen class ensures that the element adapts to the height of the user's viewport, making it ideal for responsive layouts.
 Utility-First Approach: By using a utility class like min-h-screen, you can quickly apply this behavior without writing custom CSS.
 Improved Aesthetics: It helps create visually balanced layouts by ensuring that sections or pages always fill the screen, even with minimal content.
+
+### [04/19/25] Make the dashboard private
+
+1. Navigate is a component; useNavigate is a hook.
+
+2. `<Outlet />` component:
+
+The `Outlet` is used to render the specific content of the child route while keeping the shared layout intact.
+
+  ```
+  <Route element={<PrivateRoute />}>
+    <Route path="/dashboard" element={<Dashboard />} />
+  </Route>
+  ```
+  - The PrivateRoute component is rendered first because it is specified as the element for the outer `<Route>`.
+  - The PrivateRoute component performs a check (e.g., verifying if the user is logged in or has the necessary permissions).
+  - If the check passes, the **Outlet** component inside PrivateRoute renders the child route, which in this case is the **Dashboard** component.
+  - If the check fails, the PrivateRoute component redirects the user to another route, such as `/sign-in`.
