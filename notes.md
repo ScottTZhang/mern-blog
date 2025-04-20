@@ -561,3 +561,20 @@ The `Outlet` is used to render the specific content of the child route while kee
   - The PrivateRoute component performs a check (e.g., verifying if the user is logged in or has the necessary permissions).
   - If the check passes, the **Outlet** component inside PrivateRoute renders the child route, which in this case is the **Dashboard** component.
   - If the check fails, the PrivateRoute component redirects the user to another route, such as `/sign-in`.
+
+### [04/19/25] Complete sidebar of the dashboard
+
+1. Check the error when the page is empty: Go to the browser Inspect -> Console.
+
+2. The `useEffect` hook takes two arguments:
+
+  - **Effect Function**: A callback function that contains the side effect logic. This function is executed after the component renders.
+  - **Dependency Array (optional)**: An array of values that the effect depends on. The effect will re-run only if one of these values changes. If omitted, the effect runs after every render.
+  - **Common Use Cases**: Fetching Data, Listening to Events, Synchronizing State with Props
+  - Dependency Array Behavior:
+
+    Empty Array ([]): The effect runs only once after the initial render, similar to componentDidMount.
+
+    No Array: The effect runs after every render, similar to combining componentDidMount and componentDidUpdate.
+
+    Specific Dependencies: The effect runs only when one of the specified dependencies changes.
