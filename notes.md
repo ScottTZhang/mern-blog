@@ -580,3 +580,44 @@ The `Outlet` is used to render the specific content of the child route while kee
     Specific Dependencies: The effect runs only when one of the specified dependencies changes.
 
 ### [04/19/25] Complete profile page UI
+
+### [04/20/25] Complete user image upload functionality
+
+1. Link an input to the image.
+
+2. `src={imageFileUrl || currentUser.profilePicture}`
+
+To make the uploaded image displayed, using the temp url created by `setImageFileUrl(URL.createObjectURL(file));`
+
+3. Firebase: Build -> Storage -> get started -> (have to upgrade plan)
+
+4. Firebase: `const storageRef = ref(storage, fileName);`
+
+  - `fileName`: This is the path or name of the file within the storage bucket.
+  - The `ref` function is used to create a reference to a specific path in Firebase Storage.
+
+5. Firebase: The `uploadTask.on()` method is part of the Firebase Storage API and is used to monitor the progress of a file upload to Firebase Storage.
+
+6. Firebase: `uploadTask.on(eventType, nextOrObserver, error, complete)`
+  - **eventType** (required): Specifies the type of event to listen for. The `on()` method is specifically designed to handle upload state changes, making `"state_changed"` the **only valid value** for eventType.
+  - **nextOrObserver** (optional, fill with 'null'): A callback function or observer object that handles progress updates.
+  - **error** (optional, fill with 'null'): A callback function that handles errors during the upload process. It is **highly recommended** to handle errors gracefully.
+  - **complete** (optional, fill with 'null'): A callback function that is executed when the upload is successfully completed.
+
+7. **Issue**: In HTML, <a> cannot be a descendant of <a>.
+
+Solution: 
+```
+  import { useNavigate } from "react-router-dom";
+  const navigate = useNavigate(); // Hook for programmatic navigation
+  //in component:
+  onClick={() => navigate("/dashboard?tab=profile")} // Navigate programmatically
+```
+
+8. `/``/` defines a **template liternal** allowing for multi-line strings and embedded expressions, which uses `${}`
+
+```
+className={`absolute inset-0 rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100  && 'opacity-60'}`}
+```
+
+The `${}` syntax is used inside a template literal to embed JavaScript expressions or variables into the string.
