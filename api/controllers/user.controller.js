@@ -9,7 +9,7 @@ export const test = (req, res) => {
 };
 
 export const updateUser = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   if (req.user.id !== req.params.userId) {
     return next(errorHandler(403, "You can only update your account!"));
   }
@@ -38,22 +38,23 @@ export const updateUser = async (req, res, next) => {
         errorHandler(400, "Username must only contain letters and numbers")
       );
     }
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.userId,
-        {
-          $set: {
-            username: req.body.username,
-            email: req.body.email,
-            profilePicture: req.body.profilePicture,
-          },
+  }
+  
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      {
+        $set: {
+          username: req.body.username,
+          email: req.body.email,
+          profilePicture: req.body.profilePicture,
         },
-        { new: true }
-      );
-      const { password, ...rest } = updatedUser._doc; // Destructure the user object to exclude the password
-      res.status(200).json(rest); // Send the user data as a response, hiding the password
-    } catch (error) {
-      next(error);
-    }
+      },
+      { new: true }
+    );
+    const { password, ...rest } = updatedUser._doc; // Destructure the user object to exclude the password
+    res.status(200).json(rest); // Send the user data as a response, hiding the password
+  } catch (error) {
+    next(error);
   }
 };

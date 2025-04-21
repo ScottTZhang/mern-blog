@@ -83,7 +83,7 @@ export default function SignIn() {
       dispatch(signInFailure(error.message)); // Dispatch the signInFailure action with the error message. Replace the above code
     } finally {
       //setLoading(false); // Ensure loading is reset in all cases
-      dispatch(signInFailure(error.message)); // Reset loading state
+      dispatch(signInFailure("Sign in failure")); // Reset loading state
     }
   };
 
