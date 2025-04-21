@@ -650,3 +650,7 @@ https://www.npmjs.com/package/react-circular-progressbar
 3. `$set` operator ensures that only the specified fields (username, email, profilePicture) are updated. Other fields in the document remain unchanged. If the field already exists, its value is updated. If the field does not exist, it is added to the document.
 
 ### [04/21/25] Complete update user profile page functionality
+
+### [04/21/25] Add delete user API route
+
+1. Insomnia: DELETE localhost:3000/api/user/delete/{id}
