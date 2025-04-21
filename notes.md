@@ -621,3 +621,30 @@ className={`absolute inset-0 rounded-full w-full h-full object-cover border-8 bo
 ```
 
 The `${}` syntax is used inside a template literal to embed JavaScript expressions or variables into the string.
+
+9. `inset-0`: It is shorthand for setting all four inset properties (top, right, bottom, and left) to 0. This effectively positions the element to stretch and fill its parent container.
+
+10. Install React Circular Progressbar: npm install --save react-circular-progressbar. 
+https://www.npmjs.com/package/react-circular-progressbar
+
+### [04/20/25] Add update user API route
+
+1. npm i cookie-parser
+
+2. Key points:
+
+  - In **index.js**: When **a request is received**, `app.use(cookieParser()); ` is used to reads the Cookie header from the HTTP request, parses it, and attaches the resulting key-value pairs as an object to **`req.cookies`**
+
+  - In **verifyUser.js**: `const token = req.cookies.access_token;` `req.cookies` is created by the cookie-parser middleware. The **jwt.verify** method is used to validate the authenticity and integrity of a JWT.
+    
+    `access_token`: This is the specific cookie being accessed. It contains the JWT (JSON Web Token) that was previously set by the server. It is set in the response, typically during user login or authentication:
+
+    `res.cookie("access_token", token, { httpOnly: true });` in **auth.controller.js**.
+
+    `user`: The decoded payload of the token if it is valid.
+
+    `req.user = user;`: Custom Middleware Example: verifyUser.js is an example of how `req.user` might be populated using a custom JWT middleware.
+
+  - In **user.controller.js**: req.user.id is actually populated using JWT in **verifyUser.js**. The `id` field in the JWT payload becomes `req.user.id`.
+
+3. `$set` operator ensures that only the specified fields (username, email, profilePicture) are updated. Other fields in the document remain unchanged. If the field already exists, its value is updated. If the field does not exist, it is added to the document.
