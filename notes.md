@@ -658,3 +658,9 @@ https://www.npmjs.com/package/react-circular-progressbar
 ### [04/21/25] Complete delete user account functionality
 
 1. Update userSlice.js, dispatch
+
+### [04/21/25] Add sign out functionality
+
+1. Clear cookie, redux toolkit
+
+2. **[Issue]**: Redux toolkit does not show any action. Solution: Reopen the inspect.

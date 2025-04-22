@@ -50,6 +50,14 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    signoutSuccess: (state) => {
+      state.currentUser = null;
+      state.loading = false;
+      state.error = null;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
 });
 
@@ -63,6 +71,8 @@ export const {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
+  signoutSuccess,
+  clearError
 } = userSlice.actions;
 
 //add reducer to store

@@ -1,5 +1,12 @@
 import { useSelector } from "react-redux";
-import { Alert, Button, Modal, TextInput, ModalHeader, ModalBody } from "flowbite-react";
+import {
+  Alert,
+  Button,
+  Modal,
+  TextInput,
+  ModalHeader,
+  ModalBody,
+} from "flowbite-react";
 import { useState, useRef, useEffect } from "react";
 import {
   getDownloadURL,
@@ -10,13 +17,26 @@ import {
 import { app } from "../firebase"; // Import your Firebase app configuration
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { updateFailure, updateStart, updateSuccess, deleteUserFailure, deleteUserStart, deleteUserSuccess } from "../redux/user/userSlice";
+import {
+  updateFailure,
+  updateStart,
+  updateSuccess,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  signoutSuccess,
+  clearError
+} from "../redux/user/userSlice";
 import { useDispatch } from "react-redux"; // For use user data
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useNavigate } from "react-router-dom"; // For use navigate function
 
 export default function DashProfile() {
   const { currentUser, error } = useSelector((state) => state.user);
+  console.log("Current user",currentUser);
+  console.log("Error",error);
+  
+  
   const [imageFile, setImageFile] = useState(null);
 
   const [imageFileUrl, setImageFileUrl] = useState(null);
@@ -29,7 +49,7 @@ export default function DashProfile() {
   const [showModal, setShowModal] = useState(false);
   //console.log(imageFileUploadProgress, imageFileUploadError);
   const navigate = useNavigate(); // For use navigate function
-  
+
   const filePickerRef = useRef(null);
   const dispatch = useDispatch(); // For use user data
 
@@ -48,6 +68,18 @@ export default function DashProfile() {
     }
   }, [imageFile]);
 
+  useEffect(() => {
+    if (error) {
+      dispatch(clearError()); // Clear any existing errors when the component mounts
+    }
+  }, [error, dispatch]);
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/sign-in"); // Redirect to sign-in if the user is not authenticated
+    }
+  }, [currentUser, navigate]);
+  
   const uploadImage = async () => {
     /* Firebase Storage Rules:
     service firebase.storage {
@@ -86,7 +118,7 @@ export default function DashProfile() {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageFileUrl(downloadURL);
-          setFormData({...formData, profilePicture: downloadURL});
+          setFormData({ ...formData, profilePicture: downloadURL });
           setImageFileUploading(false);
         });
       }
@@ -94,9 +126,9 @@ export default function DashProfile() {
   };
 
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.id]: e.target.value });
-  }
-  
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
@@ -135,7 +167,7 @@ export default function DashProfile() {
       dispatch(updateFailure(error.message));
       setUpdateUserError(error.message);
     }
-  }
+  };
 
   const handleDeleteUser = async () => {
     setShowModal(false); // Close the modal
@@ -147,7 +179,6 @@ export default function DashProfile() {
       const data = await res.json();
       if (!res.ok) {
         dispatch(deleteUserFailure(data.message));
-        
       } else {
         dispatch(deleteUserSuccess(data));
         navigate("/sign-in");
@@ -155,7 +186,27 @@ export default function DashProfile() {
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
     }
-  }
+  };
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        console.log("Signout successful:", data);
+        dispatch(signoutSuccess(data));
+        navigate("/sign-in");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
       <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
@@ -210,15 +261,22 @@ export default function DashProfile() {
           type="text"
           id="username"
           placeholder="username"
-          defaultValue={currentUser.username} onChange={handleChange}
+          defaultValue={currentUser.username}
+          onChange={handleChange}
         />
         <TextInput
           type="email"
           id="email"
           placeholder="email"
-          defaultValue={currentUser.email} onChange={handleChange}
+          defaultValue={currentUser.email}
+          onChange={handleChange}
         />
-        <TextInput type="password" id="password" placeholder="password"  onChange={handleChange}/>
+        <TextInput
+          type="password"
+          id="password"
+          placeholder="password"
+          onChange={handleChange}
+        />
         <Button
           type="submit"
           className="bg-gradient-to-br from-purple-600 to-blue-500 text-white hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800"
@@ -227,8 +285,12 @@ export default function DashProfile() {
         </Button>
       </form>
       <div className="text-red-500 flex justify-between mt-5">
-        <span className="cursor-pointer" onClick={()=>setShowModal(true)}>Delete Account</span>
-        <span className="cursor-pointer">Sign Out</span>
+        <span className="cursor-pointer" onClick={() => setShowModal(true)}>
+          Delete Account
+        </span>
+        <span onClick={handleSignout} className="cursor-pointer">
+          Sign Out
+        </span>
       </div>
       {updateUserSuccess && (
         <Alert className="mt-5" color="success">
@@ -245,10 +307,13 @@ export default function DashProfile() {
           {error}
         </Alert>
       )}
-      <Modal show={showModal} onClose={() => setShowModal(false)} popup size="md">
-        <ModalHeader>
-
-        </ModalHeader>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="md"
+      >
+        <ModalHeader></ModalHeader>
         <ModalBody>
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 mx-auto mb-4 dark:text-gray-200" />
@@ -259,7 +324,7 @@ export default function DashProfile() {
               <Button color="red" outline onClick={handleDeleteUser}>
                 Yes, I'm sure
               </Button>
-              <Button color='gray' onClick={() => setShowModal(false)}>
+              <Button color="gray" onClick={() => setShowModal(false)}>
                 No, cancel
               </Button>
             </div>

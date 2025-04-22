@@ -61,7 +61,7 @@ export const signin = async (req, res, next) => {
     });
 
     const { password: pass, ...rest } = validUser._doc; // Destructure the user object to exclude the password
-    console.log(pass);
+    //console.log(pass);
     res
       .status(200)
       .cookie("access_token", token, {

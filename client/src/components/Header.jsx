@@ -16,18 +16,41 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux"; // For use user data
 import { toggleTheme } from "../redux/theme/themeSlice"; // For use theme reducer function
+import { signoutSuccess } from "../redux/user/userSlice";
+import { useNavigate } from "react-router-dom"; // For use navigate function
 
 export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch(); // For use theme reducer function
+  const navigate = useNavigate(); // For use navigate function
   const { currentUser } = useSelector((state) => state.user); // For use user data
   //state represents the entire Redux state.
   //state.user.currentUser is the specific part of the state being accessed.
   const { theme } = useSelector((state) => state.theme);
-  
+
   const handleTheme = () => {
     dispatch(toggleTheme());
-  }
+  };
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        console.log("Signout successful:", data);
+        dispatch(signoutSuccess(data));
+        navigate("/sign-in");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Navbar className="border-b-2">
       <Link
@@ -58,7 +81,7 @@ export default function Header() {
           color="gray"
           pill
         >
-          {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          {theme === "dark" ? <FaSun /> : <FaMoon />}
         </Button>
         {currentUser ? (
           <Dropdown
@@ -78,7 +101,7 @@ export default function Header() {
               <DropdownItem>Profile</DropdownItem>
             </Link>
             <DropdownDivider />
-            <DropdownItem>Sign out</DropdownItem>
+            <DropdownItem onClick={handleSignout}>Sign out</DropdownItem>
           </Dropdown>
         ) : (
           <Link to="/sign-in">
