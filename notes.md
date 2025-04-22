@@ -654,3 +654,7 @@ https://www.npmjs.com/package/react-circular-progressbar
 ### [04/21/25] Add delete user API route
 
 1. Insomnia: DELETE localhost:3000/api/user/delete/{id}
+
+### [04/21/25] Complete delete user account functionality
+
+1. Update userSlice.js, dispatch
