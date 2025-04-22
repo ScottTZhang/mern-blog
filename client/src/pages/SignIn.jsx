@@ -2,12 +2,15 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
-import {useDispatch, useSelector} from 'react-redux';
-import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 
 export default function SignIn() {
-  
   const [formData, setFormData] = React.useState({
     username: "",
     email: "",
@@ -19,7 +22,7 @@ export default function SignIn() {
   //const [loading, setLoading] = useState(false);
   // Destructure the errorMessage and loading state. Replaced by Redux state
 
-  const {loading, error: errorMessage} = useSelector((state) => state.user);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   // Initialize the dispatch function from Redux
@@ -29,9 +32,9 @@ export default function SignIn() {
     // Update the formData state with the new value
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value.trim()
+      [e.target.id]: e.target.value.trim(),
     });
-  }
+  };
   console.log(formData);
 
   const handleSubmit = async (e) => {
@@ -53,37 +56,34 @@ export default function SignIn() {
       //setErrorMessage(null); // Reset error message
       dispatch(signInStart());
       // Dispatch the signInStart action to update the Redux state, to replace the aobve code
-      
-      const res = await (fetch('/api/auth/signin', {
-        method: 'POST',
+
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }));
+      });
       const data = await res.json();
-      
+
       if (data.success === false) {
         //setLoading(false);
         //setErrorMessage(data.message);
         console.log("data.message: ", data.message);
         dispatch(signInFailure(data.message)); // Dispatch the signInFailure action with the error message. Replace the above code
       }
-      
+
       if (res.ok) {
         //setErrorMessage(null); // Reset error message
-        dispatch(signInSuccess(data)); // Dispatch the signInSuccess action with the user data. 
+        dispatch(signInSuccess(data)); // Dispatch the signInSuccess action with the user data.
         console.log("data: ", data);
         //Replace the above code
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
       //setErrorMessage(error.message);
       //setLoading(false); // Reset loading state
       dispatch(signInFailure(error.message)); // Dispatch the signInFailure action with the error message. Replace the above code
-    } finally {
-      //setLoading(false); // Ensure loading is reset in all cases
-      dispatch(signInFailure("Sign in failure")); // Reset loading state
     }
   };
 
@@ -99,7 +99,8 @@ export default function SignIn() {
             Blog
           </Link>
           <p className="text-sm mt-5">
-            This is a demo project. You can sign in with your email and password or with Google
+            This is a demo project. You can sign in with your email and password
+            or with Google
           </p>
         </div>
 
@@ -112,7 +113,8 @@ export default function SignIn() {
                 type="email"
                 placeholder="name@company"
                 id="email"
-                className="mt-2" onChange={handleChange}
+                className="mt-2"
+                onChange={handleChange}
               />
             </div>
             <div className="">
@@ -121,39 +123,40 @@ export default function SignIn() {
                 type="password"
                 placeholder="Password"
                 id="password"
-                className="mt-2" onChange={handleChange}
+                className="mt-2"
+                onChange={handleChange}
               />
             </div>
-            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:bg-gradient-to-l focus:ring-purple-200 dark:focus:ring-purple-800"
+            <Button
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:bg-gradient-to-l focus:ring-purple-200 dark:focus:ring-purple-800"
               type="submit"
               disabled={loading}
             >
-              {
-                loading ? (
-                  <>
-                  <Spinner size='sm' />
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
                   <span className="pl-3">Loading...</span>
-                  </>
-                ): 'Sign In'
-              }
+                </>
+              ) : (
+                "Sign In"
+              )}
             </Button>
             <OAuth />
           </form>
-          
+
           <div className="flex gap-2 mt-5 text-sm">
-            <span>Don't have an account?</span> 
-            <Link to="/sign-up" className="text-blue-500">Sign up</Link>
+            <span>Don't have an account?</span>
+            <Link to="/sign-up" className="text-blue-500">
+              Sign up
+            </Link>
           </div>
-          {
-            errorMessage && (
-            <Alert className="mt-5" color='failure'>
+          {errorMessage && (
+            <Alert className="mt-5" color="failure">
               {errorMessage}
             </Alert>
-            )
-          }
+          )}
         </div>
       </div>
     </div>
   );
 }
-

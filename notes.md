@@ -664,3 +664,7 @@ https://www.npmjs.com/package/react-circular-progressbar
 1. Clear cookie, redux toolkit
 
 2. **[Issue]**: Redux toolkit does not show any action. Solution: Reopen the inspect.
+
+### [04/22/25] Add admin functionality to the user
+
+1. Update User model: add isAdmin.
