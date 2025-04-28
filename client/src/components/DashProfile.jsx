@@ -25,18 +25,17 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   signoutSuccess,
-  clearError
+  clearError,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux"; // For use user data
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { useNavigate } from "react-router-dom"; // For use navigate function
+import { Link, useNavigate } from "react-router-dom"; // For use navigate function
 
 export default function DashProfile() {
-  const { currentUser, error } = useSelector((state) => state.user);
-  console.log("Current user",currentUser);
-  console.log("Error",error);
-  
-  
+  const { currentUser, error, loading } = useSelector((state) => state.user);
+  console.log("Current user", currentUser);
+  console.log("Error", error);
+
   const [imageFile, setImageFile] = useState(null);
 
   const [imageFileUrl, setImageFileUrl] = useState(null);
@@ -79,7 +78,7 @@ export default function DashProfile() {
       navigate("/sign-in"); // Redirect to sign-in if the user is not authenticated
     }
   }, [currentUser, navigate]);
-  
+
   const uploadImage = async () => {
     /* Firebase Storage Rules:
     service firebase.storage {
@@ -279,10 +278,21 @@ export default function DashProfile() {
         />
         <Button
           type="submit"
+          disabled={loading || imageFileUploading}
           className="bg-gradient-to-br from-purple-600 to-blue-500 text-white hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800"
         >
-          Update
+          {loading ? "Loadnig..." : "Update"}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={"/create-post"}>
+            <Button
+              type="button"
+              className=" w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:bg-gradient-to-l focus:ring-purple-200 dark:focus:ring-purple-800"
+            >
+              Create a Post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>

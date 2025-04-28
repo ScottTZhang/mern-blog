@@ -668,3 +668,25 @@ https://www.npmjs.com/package/react-circular-progressbar
 ### [04/22/25] Add admin functionality to the user
 
 1. Update User model: add isAdmin.
+
+### [04/22/25] Complete create a post page UI
+
+1. `<Link to={'/create-post'}>`
+
+  - This is a **relative** path. The navigation will append create-post to the current URL path. For example: If the current URL is /dashboard, navigating to create-post will result in **`/dashboard/create-post`**.
+
+  - If your application has nested routes like /dashboard/create-post, using `to={'create-post'}` makes sense because it appends create-post to /dashboard.
+
+  - `to={'/create-post'}:` This is an absolute path. The navigation will go directly to /create-post, regardless of the current URL path.
+
+2. `return currentUser.isAdmin ? <Outlet /> : <Navigate to="/sign-in" />;`
+
+  - The `<Outlet />` component is provided by react-router-dom and is used in the context of nested routing. It acts as a placeholder for rendering the child routes of the current route.
+
+  - If currentUser is truthy, the `<Outlet />` component is rendered, allowing the user to access the child routes defined under this private route.
+
+3. Text editor in webapge: Install react-quill
+
+  - `npm install react-quill --save` in client folder. 
+  - **[Issue]** 2.0.0 peerDependencies only support React 16, 17 and 18, not React 19. [Solution]: `npm install react-quill-new`. https://www.npmjs.com/package/react-quill-new
+

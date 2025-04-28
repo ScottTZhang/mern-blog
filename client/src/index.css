@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  height: 100vh;
+}
+
+.ql-editor {
+  font-size: 1.05 rem; /* increate 5% of whatever the default is */
+}
