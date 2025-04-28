@@ -690,3 +690,12 @@ https://www.npmjs.com/package/react-circular-progressbar
   - `npm install react-quill --save` in client folder. 
   - **[Issue]** 2.0.0 peerDependencies only support React 16, 17 and 18, not React 19. [Solution]: `npm install react-quill-new`. https://www.npmjs.com/package/react-quill-new
 
+### [04/27/25] Add create a post API route
+
+1. Create Post model in post.model.js
+
+2. Create `router.post('/create', verifyToken, create);`
+
+3. Create "create" function in post.controller.js.
+
+4. Test API `/create` in Insomnia
