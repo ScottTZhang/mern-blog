@@ -699,3 +699,7 @@ https://www.npmjs.com/package/react-circular-progressbar
 3. Create "create" function in post.controller.js.
 
 4. Test API `/create` in Insomnia
+
+### [05/03/25] Complete upload post image functionality
+
+1. Edit CreatePost.jsx. `uploadTask.on()`
