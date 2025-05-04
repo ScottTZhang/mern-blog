@@ -703,3 +703,7 @@ https://www.npmjs.com/package/react-circular-progressbar
 ### [05/03/25] Complete upload post image functionality
 
 1. Edit CreatePost.jsx. `uploadTask.on()`
+
+### [05/04/25] Complete create post functionality
+
+`useNavigate`, `handleSubmit`
