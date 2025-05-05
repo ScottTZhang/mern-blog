@@ -710,3 +710,20 @@ https://www.npmjs.com/package/react-circular-progressbar
 
 ### [05/04/25] Add posts section to the dashboard
 
+### [05/04/25] Create get posts API route
+
+1. `Post.find(filters).sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);`
+
+  - The Post.find() method is used to query the Post collection in the MongoDB database. It accepts a filter object as its argument.
+  - .skip(startIndex): Skips a specified number of documents, typically used for pagination.
+  - .limit(limit): Limits the number of documents returned, also used for pagination.
+
+2. `const filters = {`**`...`**`(re.query.userId && {...})}`
+
+The **spread operator** (...) is used to conditionally add the $or condition to the parent object. If req.query.search is falsy, the spread operator adds nothing, ensuring that the search filter is only applied when the search query parameter is provided.
+
+  - The `$or` operator in MongoDB is used to match documents that satisfy at least one of the specified conditions.
+  - The `$options: "i"` flag makes the search case-insensitive
+  - The `$regex` operator is used to perform pattern matching in MongoDB.
+
+3. `res.status(200).json({posts, totalPosts, lastMonthPosts, });` JavaScript's shorthand property syntax is used. In JavaScript, if **the property name and the variable name are the same**, you can use shorthand syntax to define the object. 
