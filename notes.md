@@ -726,4 +726,22 @@ The **spread operator** (...) is used to conditionally add the $or condition to 
   - The `$options: "i"` flag makes the search case-insensitive
   - The `$regex` operator is used to perform pattern matching in MongoDB.
 
-3. `res.status(200).json({posts, totalPosts, lastMonthPosts, });` JavaScript's shorthand property syntax is used. In JavaScript, if **the property name and the variable name are the same**, you can use shorthand syntax to define the object. 
+3. `res.status(200).json({posts, totalPosts, lastMonthPosts, });` JavaScript's shorthand property syntax is used. In JavaScript, if **the property name and the variable name are the same**, you can use shorthand syntax to define the object.
+
+### [05/05/25] Show user posts inside dashboard
+
+1. Install tailwind-scrollbar: https://www.npmjs.com/package/tailwind-scrollbar
+
+For "tailwindcss": "^3.4.17", I need to use `npm install tailwind-scrollbar@^3.1.1`
+
+2. `className="divide-y"`. The **divide-y** class in Tailwind CSS is used to add horizontal dividing lines between vertically stacked child elements, enhancing the visual structure of lists, menus, or other layouts.
+
+3. `table-auto`: It sets the table's layout to auto, which means the column widths are determined by the content inside the cells. The browser calculates the width of each column based on the content, rather than using a fixed width.
+
+4. `overflow-x-scroll`: This class applies a horizontal scrollbar to the element if its content overflows the width of the container.
+
+5. `mx-auto`: Centers the element horizontally
+
+6. userPosts.map((post) => **{}**)
+  - Issue: The arrow function uses curly braces {} but does not include a **return** statement. As a result, the map() function does not return any JSX elements to render.
+  - Solution: Use **Parentheses** Instead of Curly Braces: When using parentheses () in an arrow function, the value is implicitly returned.
