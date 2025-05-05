@@ -707,3 +707,6 @@ https://www.npmjs.com/package/react-circular-progressbar
 ### [05/04/25] Complete create post functionality
 
 `useNavigate`, `handleSubmit`
+
+### [05/04/25] Add posts section to the dashboard
+
