@@ -749,3 +749,49 @@ For "tailwindcss": "^3.4.17", I need to use `npm install tailwind-scrollbar@^3.1
 ### [05/05/25] Add show more funtionality to the posts results of the dashboard
 
 1. Use the "startIndex" to fetch "getposts" API
+
+### [05/05/25] Add delete post funtionality to the dashboard
+
+1. Create API route in post.route.js.
+
+2. Create delete function in post.controller.js
+
+3. `setUserPosts((prev) => prev.filter((post) => post._id !== postIdToDelete));`
+
+Equivalent to:
+
+```
+setUserPosts((prev) => {
+  // Create a new array by filtering out the post with the matching _id
+  const updatedPosts = prev.filter((post) => {
+    return post._id !== postIdToDelete;
+  });
+
+  // Return the new array as the updated state
+  return updatedPosts;
+});
+```
+
+or:
+
+```
+setUserPosts((prev) => {
+  // Initialize a new array to store posts that are not deleted
+  const updatedPosts = [];
+
+  // Loop through the previous posts
+  for (let post of prev) {
+    // Add the post to the new array if its _id does not match postIdToDelete
+    if (post._id !== postIdToDelete) {
+      updatedPosts.push(post);
+    }
+  }
+
+  // Return the new array as the updated state
+  return updatedPosts;
+});
+```
+
+4. **Issue**: Each child in a list should have a unique "key" prop.
+
+Solution: `<TableBody key={post._id}> ...`
