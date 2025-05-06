@@ -745,3 +745,7 @@ For "tailwindcss": "^3.4.17", I need to use `npm install tailwind-scrollbar@^3.1
 6. userPosts.map((post) => **{}**)
   - Issue: The arrow function uses curly braces {} but does not include a **return** statement. As a result, the map() function does not return any JSX elements to render.
   - Solution: Use **Parentheses** Instead of Curly Braces: When using parentheses () in an arrow function, the value is implicitly returned.
+
+### [05/05/25] Add show more funtionality to the posts results of the dashboard
+
+1. Use the "startIndex" to fetch "getposts" API

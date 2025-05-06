@@ -13,9 +13,7 @@ import {
 import { app } from "../firebase"; // Import the firebase app
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"; // Import the styles for the progress bar
-import { useNavigate
-
- } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function CreatePost() {
   const [file, setFile] = useState(null); //for image upload
   const [imageUploadProgress, setImageUploadProgress] = useState(null); //for image upload progress
@@ -70,9 +68,9 @@ export default function CreatePost() {
     e.preventDefault();
     try {
       const res = await fetch("/api/post/create", {
-        method : "POST",
+        method: "POST",
         headers: {
-          'Content-Type': "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -83,7 +81,6 @@ export default function CreatePost() {
       }
       setPublishError(null);
       navigate(`/post/${data.slug}`);
-
     } catch (error) {
       setPublishError("Post publish failed");
     }
@@ -110,7 +107,7 @@ export default function CreatePost() {
             }
           >
             <option value="uncategorized">Select a catagory</option>
-            <option value="javascript">JavaCcript</option>
+            <option value="javascript">JavaScript</option>
             <option value="reactjs">React.js</option>
             <option value="nextjs">Next.js</option>
           </Select>
@@ -161,7 +158,11 @@ export default function CreatePost() {
         >
           Publish
         </Button>
-        {publishError && <Alert className="mt-5" color="failure">{publishError}</Alert>}
+        {publishError && (
+          <Alert className="mt-5" color="failure">
+            {publishError}
+          </Alert>
+        )}
       </form>
     </div>
   );
