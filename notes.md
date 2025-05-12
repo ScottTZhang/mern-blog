@@ -712,7 +712,7 @@ https://www.npmjs.com/package/react-circular-progressbar
 
 ### [05/04/25] Create get posts API route
 
-1. `Post.find(filters).sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);`
+1. getPosts function: `Post.find(filters).sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);`
 
   - The Post.find() method is used to query the Post collection in the MongoDB database. It accepts a filter object as its argument.
   - .skip(startIndex): Skips a specified number of documents, typically used for pagination.
@@ -795,3 +795,19 @@ setUserPosts((prev) => {
 4. **Issue**: Each child in a list should have a unique "key" prop.
 
 Solution: `<TableBody key={post._id}> ...`
+
+### [05/12/25] Add update post functionality
+
+1. Create UpdatePost.jsx
+
+2. Add Route in App.jsx
+
+3. Use getPost function and postId from post.controller.js to get the post.
+
+4. Keep formData:
+
+```
+  onChange={(e) =>
+    setFormData((prev) => ({ ...prev, category: e.target.value }))
+  }
+```
