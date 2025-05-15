@@ -26,15 +26,12 @@ export default function DashUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(
-          `/api/user/getusers`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`/api/user/getusers`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await res.json();
         //console.log(data);
         if (res.ok) {
@@ -55,9 +52,7 @@ export default function DashUsers() {
   const handleShowMore = async () => {
     const startIndex = users.length;
     try {
-      const res = await fetch(
-        `/api/user/getuser?startIndex=${startIndex}`
-      );
+      const res = await fetch(`/api/user/getuser?startIndex=${startIndex}`);
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
@@ -105,7 +100,6 @@ export default function DashUsers() {
               <TableHeadCell>Email</TableHeadCell>
               <TableHeadCell>Admin</TableHeadCell>
               <TableHeadCell>Delete</TableHeadCell>
-              
             </TableHead>
             {users.map((user) => (
               <TableBody key={user._id} className="divide-y">
@@ -114,19 +108,21 @@ export default function DashUsers() {
                     {new Date(user.createdAt).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
-                    
-                      <img
-                        src={user.profilePicture}
-                        alt={user.username}
-                        className="w-10 h-10 object-cover bg-gray-500 rounded-full"
-                      />
-                    
+                    <img
+                      src={user.profilePicture}
+                      alt={user.username}
+                      className="w-10 h-10 object-cover bg-gray-500 rounded-full"
+                    />
                   </TableCell>
-                  <TableCell>
-                      {user.username}
-                  </TableCell>
+                  <TableCell>{user.username}</TableCell>
                   <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.isAdmin ? (<FaCheck className="text-green-500"/>) : (<FaTimes className="text-red-500"/>)}</TableCell>
+                  <TableCell>
+                    {user.isAdmin ? (
+                      <FaCheck className="text-green-500" />
+                    ) : (
+                      <FaTimes className="text-red-500" />
+                    )}
+                  </TableCell>
                   <TableCell>
                     <span
                       onClick={() => {
@@ -138,7 +134,6 @@ export default function DashUsers() {
                       Delete
                     </span>
                   </TableCell>
-                  
                 </TableRow>
               </TableBody>
             ))}
