@@ -811,3 +811,11 @@ Solution: `<TableBody key={post._id}> ...`
     setFormData((prev) => ({ ...prev, category: e.target.value }))
   }
 ```
+
+### [05/15/25] Create get users API route
+
+1. Create API route `/getusers`.
+
+2. Create controller function `getUsers`.
+
+3. Test in Insomnia http://localhost:3000/api/user/getusers?sort=asc&limit=4
