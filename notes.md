@@ -819,3 +819,9 @@ Solution: `<TableBody key={post._id}> ...`
 2. Create controller function `getUsers`.
 
 3. Test in Insomnia http://localhost:3000/api/user/getusers?sort=asc&limit=4
+
+### [05/16/25] Show users to the admin dashboard
+
+1. Create DashUsers.jsx. Similar to DashPosts.jsx.
+
+2. Add the component to DashSideBar.jsx, Dashboard.jsx
