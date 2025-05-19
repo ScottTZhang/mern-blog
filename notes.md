@@ -839,3 +839,26 @@ Solution: `<TableBody key={post._id}> ...`
 ### [05/18/25] Add call-to-action to the post page
 
 1. Create CallToAction.jsx component
+
+### [05/18/25] Add comment section to the post page
+
+1. ScrollToTop.jsx component is used to display from the top of the page.
+
+2. Create CommentSection.jsx component
+
+3. Create comment.model.js
+
+Design of the schema in MongoDB.
+
+4. Create comment.route.js and design the API route.
+
+The Router() method is part of the Express.js framework and is used to create a new router object.
+A router is essentially a mini Express application that can handle routes and middleware independently of the main application.
+
+5. Create functions such as `createComment` in comment.controller.js
+
+Define the method use to handle the schema in MongoDB.
+
+6. Add the comment router in the index.js as "commentRoutes".
+
+7. `import { verifyToken } from '../utils/verifyUser.js';` needs to add ".js" 
