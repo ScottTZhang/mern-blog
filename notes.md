@@ -828,3 +828,10 @@ Solution: `<TableBody key={post._id}> ...`
 
 ### [05/18/25] Add delete user functionality to the admin user
 
+### [05/18/25] Complete post page functionality
+
+1. Create PostPage.jsx
+
+2. Add the PostPage to App.jsx
+
+3. "post-content" is s customized css styling. 
