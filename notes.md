@@ -835,3 +835,7 @@ Solution: `<TableBody key={post._id}> ...`
 2. Add the PostPage to App.jsx
 
 3. "post-content" is s customized css styling. 
+
+### [05/18/25] Add call-to-action to the post page
+
+1. Create CallToAction.jsx component
