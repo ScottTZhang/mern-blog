@@ -825,3 +825,6 @@ Solution: `<TableBody key={post._id}> ...`
 1. Create DashUsers.jsx. Similar to DashPosts.jsx.
 
 2. Add the component to DashSideBar.jsx, Dashboard.jsx
+
+### [05/18/25] Add delete user functionality to the admin user
+

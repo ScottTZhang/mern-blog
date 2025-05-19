@@ -65,11 +65,10 @@ export default function DashUsers() {
     }
   };
 
-  const handleDeleteUser = async (postId) => {
-    /*setShowModal(false); //close the modal
+  const handleDeleteUser = async () => {
     try {
       const res = await fetch(
-        `/api/user/deleteuser/${userIdToDelete}/${currentUser._id}`,
+        `/api/user/delete/${userIdToDelete}`,
         {
           method: "DELETE",
         }
@@ -81,11 +80,12 @@ export default function DashUsers() {
         setUsers((prev) =>
           prev.filter((user) => user._id !== userIdToDelete)
         ); // Remove the deleted post from the list
-        setPostIdToDelete(null); // Reset the postIdToDelete state
+        setShowModal(false); //close the modal
+        setUserIdToDelete(null); // Reset the userIdToDelete state
       }
     } catch (error) {
       console.log(error.message);
-    } */
+    }
   };
 
   return (
