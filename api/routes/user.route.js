@@ -5,6 +5,7 @@ import {
   deleteUser,
   signout,
   getUsers,
+  getUser,
 } from "../controllers/user.controller.js"; // Import the test function from the controller
 import { verifyToken } from "../utils/verifyUser.js";
 const router = express.Router();
@@ -18,4 +19,6 @@ router.delete("/delete/:userId", verifyToken, deleteUser);
 router.post("/signout", signout);
 
 router.get("/getusers", verifyToken, getUsers);
+
+router.get("/:userId", getUser);
 export default router;

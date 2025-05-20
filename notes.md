@@ -862,3 +862,18 @@ Define the method use to handle the schema in MongoDB.
 6. Add the comment router in the index.js as "commentRoutes".
 
 7. `import { verifyToken } from '../utils/verifyUser.js';` needs to add ".js" 
+
+### [05/20/25] Show comments of a post
+
+1. Create API in comment.route.js
+
+2. Create Comment.jsx component in CommentSection.
+
+`export default function Comment({ comment }) {...}` : The `{ comment }` syntax is a shorthand for destructuring the props object. Instead of writing:
+```
+function Comment(props) {
+  const comment = props.comment;
+}
+```
+
+3. Install a package in client: npm i moment. To display the timespan of a comment from created time to now.

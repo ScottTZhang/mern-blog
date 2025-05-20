@@ -122,3 +122,16 @@ export const getUsers = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return next(errorHandler(404, "User not found"));
+    }
+    const { password, ...rest } = user._doc; // Destructure the user object to exclude the password
+    res.status(200).json(rest); // Send the user data as a response, hiding the password
+  } catch (error) {
+    next(error);
+  }
+};
