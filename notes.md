@@ -877,3 +877,28 @@ function Comment(props) {
 ```
 
 3. Install a package in client: npm i moment. To display the timespan of a comment from created time to now.
+
+### [09/20/25] Add like functionality to the comment component
+
+1. Create API in comment.route.js.
+
+2. Complete likeComment method in comment.controller.js
+
+3. Create handleLike function in CommentSection.jsx
+
+4. Button toggle example 
+
+```
+<button
+  type="button"
+  onClick={() => onLike(comment._id)}
+  className={`text-gray-400 hover:text-blue-500 
+  ${
+    currentUser && comment.likes.includes(currentUser._id)
+      ? "!text-blue-500"
+      : ""
+  }`}
+>
+  <FaThumbsUp className="text-sm" />
+</button>
+```
