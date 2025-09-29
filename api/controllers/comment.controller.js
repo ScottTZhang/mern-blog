@@ -44,7 +44,6 @@ export const likeComment = async (req, res, next) => {
       comment.likes.push(req.user.id);
       comment.numberOfLikes += 1;
       //console.log(comment.likes);
-      
     } else {
       //if the userId is in the like array, remove it
       comment.likes.splice(userIndex, 1);
@@ -54,9 +53,8 @@ export const likeComment = async (req, res, next) => {
     res.status(200).json(comment);
   } catch (error) {
     console.log(error.message);
-    
   }
-}
+};
 
 export const editComment = async (req, res, next) => {
   try {
@@ -65,7 +63,9 @@ export const editComment = async (req, res, next) => {
       return next(errorHandler(404, "Comment not found"));
     }
     if (comment.userId !== req.user.id && !req.user.isAdmin) {
-      return next(errorHandler(403, "You are not allowed to edit this comment."));
+      return next(
+        errorHandler(403, "You are not allowed to edit this comment.")
+      );
     }
 
     const editedComment = await Comment.findByIdAndUpdate(
@@ -80,4 +80,22 @@ export const editComment = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
+export const deleteComment = async (req, res, next) => {
+  try {
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) {
+      return next(errorHandler(404, "Comment not found"));
+    }
+    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+      return next(
+        errorHandler(403, "You are not allowed to delete this comment.")
+      );
+    }
+    await Comment.findByIdAndDelete(req.params.commentId);
+    res.status(200).json("Comment has been deleted.");
+  } catch (error) {
+    next(error);
+  }
+};

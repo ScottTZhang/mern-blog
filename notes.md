@@ -910,3 +910,5 @@ function Comment(props) {
 1. Create API in comment.route.js.
 
 2. Add function editComment() in comment.controller.js
+
+### [09/28/25] Add delete functionality to the comment component
