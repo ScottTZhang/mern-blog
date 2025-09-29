@@ -91,6 +91,8 @@ Cause: lib version has updated to new ones. libs that supported gradientDuoTone:
  - flowbite	^1.6.0
  - flowbite-react	^0.5.2
 
+Button gradients were completely removed in 0.11.0.
+
 ```
 <Link to="/sign-in">
   <Button
@@ -902,3 +904,9 @@ function Comment(props) {
   <FaThumbsUp className="text-sm" />
 </button>
 ```
+
+### [09/28/25] Add edit functionality to the comment component
+
+1. Create API in comment.route.js.
+
+2. Add function editComment() in comment.controller.js
