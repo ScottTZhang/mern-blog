@@ -912,3 +912,14 @@ function Comment(props) {
 2. Add function editComment() in comment.controller.js
 
 ### [09/28/25] Add delete functionality to the comment component
+
+### [10/05/25] Add recent article section to the post page
+
+1. Add frontend in PostPage.jsx
+
+2. Create PostCrd.jsx component.
+
+[Note] const res = await fetch(`/api/post/getposts?limit=3`); Must contains the first '/' in the query.
+
+
+

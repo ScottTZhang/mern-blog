@@ -55,7 +55,7 @@ export default function CommentSection({ postId }) {
     }
   };
 
-  console.log(comments);
+  //console.log(comments);
   useEffect(() => {
     const getComments = async () => {
       try {
