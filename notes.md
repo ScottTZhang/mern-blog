@@ -921,5 +921,6 @@ function Comment(props) {
 
 [Note] const res = await fetch(`/api/post/getposts?limit=3`); Must contains the first '/' in the query.
 
+### [10/06/25] Add comments section to the admin dashboard
 
-
+1. Based on DashUser.jsx.

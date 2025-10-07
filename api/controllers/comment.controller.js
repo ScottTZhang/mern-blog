@@ -99,3 +99,24 @@ export const deleteComment = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getComments = async (req, res, next) => {
+  if(!req.user.isAdmin)
+    return next(errorHandler(403, "You are not allowed to access this resource."));
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = 9; // Number of comments to fetch per request
+    const sortDirection = req.query.sort === 'desc' ? -1 : 1; // Default to ascending order
+    const comments = await Comment.find()
+      .sort({ createdAt: sortDirection }) // Sort by creation date, newest first
+      .skip(startIndex) // Skip the comments already fetched
+      .limit(limit); // Limit the number of comments fetched
+    const totalComments = await Comment.countDocuments();
+    const now = new Date();
+    const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    const lastMonthComments = await Comment.countDocuments({ createdAt: { $gte: oneMonthAgo } });
+    res.status(200).json({comments, totalComments, lastMonthComments});
+  } catch (error) {
+    next(error);
+  }
+}
