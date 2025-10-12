@@ -7,6 +7,7 @@ import {
 import {
   HiAnnotation,
   HiArrowRight,
+  HiChartPie,
   HiDocumentText,
   HiOutlineUserGroup,
   HiUser,
@@ -29,7 +30,7 @@ export default function DashSidebar() {
     console.log(tabFromUrl);
     if (tabFromUrl) {
       setTab(tabFromUrl);
-    }
+    } 
   }, [location.search]);
 
   const handleSignout = async () => {
@@ -55,6 +56,18 @@ export default function DashSidebar() {
     <Sidebar className="w-full md:w-56">
       <SidebarItems>
         <SidebarItemGroup className="flex flex-col gap-1">
+          {currentUser && currentUser.isAdmin && (
+            <Link to='/dashboard?tab=dashboard'>
+            <SidebarItem
+                icon={HiChartPie}
+                active={tab === "dashboard" || tab === "" || !tab}
+                as="div"
+              >
+                Dashboard
+            </SidebarItem>
+            </Link>
+          )}
+
           <SidebarItem
             active={tab === "profile"}
             icon={HiUser}

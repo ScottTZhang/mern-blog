@@ -5,6 +5,7 @@ import DashProfile from "../components/DashProfile";
 import DashPosts from "../components/DashPosts";
 import DashUsers from "../components/DashUsers";
 import DashComments from "../components/DashComments";
+import DashboardCom from "../components/DashboardCom";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -16,6 +17,8 @@ export default function Dashboard() {
     console.log(tabFromUrl);
     if (tabFromUrl) {
       setTab(tabFromUrl);
+    } else {
+      setTab("dashboard");
     }
   }, [location.search]);
   //The useEffect hook is used to perform side effects in functional components. In this case, it runs whenever the location.search value changes.
@@ -35,6 +38,8 @@ export default function Dashboard() {
       {tab === "users" && <DashUsers />}
       {/* comments */}
       {tab === 'comments' && <DashComments />}
+      {/* dashboard component */ }
+      {tab === "dashboard" && <DashboardCom />}
     </div>
   );
 }

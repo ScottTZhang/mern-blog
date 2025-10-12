@@ -924,3 +924,11 @@ function Comment(props) {
 ### [10/06/25] Add comments section to the admin dashboard
 
 1. Based on DashUser.jsx.
+
+### [10/11/25] Add dashboard overview to the admin dashboard
+
+1. Create DashboardCom.jsx component
+
+2. useState to record data; useSelector to get current user; useEffect to pre-load data
+
+
