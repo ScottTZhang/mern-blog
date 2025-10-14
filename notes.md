@@ -932,3 +932,9 @@ function Comment(props) {
 2. useState to record data; useSelector to get current user; useEffect to pre-load data
 
 ### [10/13/25] Complete home page
+
+### [10/13/25] Complete search page
+
+1. useEffect(() =>{...}, [SearchTerm]), and use location "useLocation" in the page.
+
+2. fetchPosts only return 9 result each time: In post.controller.js, `Post.find(filters).sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);` decides the startIndex and result limit.
