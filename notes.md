@@ -931,4 +931,4 @@ function Comment(props) {
 
 2. useState to record data; useSelector to get current user; useEffect to pre-load data
 
-
+### [10/13/25] Complete home page
