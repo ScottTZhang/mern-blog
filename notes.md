@@ -938,3 +938,5 @@ function Comment(props) {
 1. useEffect(() =>{...}, [SearchTerm]), and use location "useLocation" in the page.
 
 2. fetchPosts only return 9 result each time: In post.controller.js, `Post.find(filters).sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);` decides the startIndex and result limit.
+
+### [10/13/25] Complete about and project page
