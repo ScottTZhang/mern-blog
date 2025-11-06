@@ -939,4 +939,8 @@ function Comment(props) {
 
 2. fetchPosts only return 9 result each time: In post.controller.js, `Post.find(filters).sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);` decides the startIndex and result limit.
 
-### [10/13/25] Complete about and project page
+### [11/06/25] Complete about and project page
+
+### [11/06/25] Deploy to Render
+
+Vite (and many bundlers) output compiled files into a "dist" directory by default, so your Express code points to client/dist/index.html to serve the single-page app.
